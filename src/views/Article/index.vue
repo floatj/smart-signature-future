@@ -97,9 +97,11 @@
               placeholder="输入推荐语…" @change="handleCommentChange">
             </za-input></Row>
             <br/>
-            <Row><za-input
-              v-model="v5" type="price" placeholder="输入打赏 EOS" @change="handleChange">
-            </za-input></Row>
+            <Row>
+              <za-input
+                 type="number" v-model.number="amountInputValue" placeholder="输入打赏 EOS" @input="handleChange">
+              </za-input>
+            </Row>
             <br/>
             <Row><za-button class="button-support"
               size='xl' theme="primary"
@@ -277,7 +279,7 @@ export default {
     totalSupportedAmount: 0,
     visible3: false,
     v3: '',
-    v5: '',
+    amountInputValue: '',
     clipboard: null,
     articleCreateTime: ' 月 日',
   }),
@@ -350,6 +352,8 @@ export default {
       console.log('comment :', this.comment);
     },
     handleChange(v) {
+      v = v.replace(/-/g, '');
+      this.amountInputValue = v
       this.amount = v;
       console.log('amount :', this.amount);
     },
